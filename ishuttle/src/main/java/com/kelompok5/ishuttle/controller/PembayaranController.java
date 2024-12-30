@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
@@ -34,6 +35,8 @@ public class PembayaranController {
         model.addAttribute("selectedKursiId", selectedKursiId);
         model.addAttribute("shuttleId", shuttleId);
         model.addAttribute("penumpangId", penumpangId);
+        BigDecimal harga = (shuttleService.cariShuttleById(shuttleId)).getHarga();      
+        model.addAttribute("harga",harga);
         return "pembayaran"; // Halaman pembayaran
     }
 
@@ -47,7 +50,9 @@ public class PembayaranController {
 
         System.out.println(selectedKursiId);
         System.out.println(shuttleId);
-        System.out.println(penumpangId);                            
+        System.out.println(penumpangId);    
+         
+              
         if ("cancel".equals(action)) {
             // Jika pengguna membatalkan pembayaran
 

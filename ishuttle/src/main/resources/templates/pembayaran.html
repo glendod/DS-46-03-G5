@@ -6,25 +6,44 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Metode Pembayaran</h2>
-        <form action="/proses-pembayaran" method="post">
-            <input type="hidden" name="selectedKursiId" th:value="${selectedKursiId}" />
-            <input type="hidden" id="shuttleId" name="shuttleId" th:value="${shuttleId}">
-            <input type="hidden" id="penumpangId" name="penumpangId" th:value="${penumpangId}">
-            <div class="mb-3">
-                <label for="metodePembayaran" class="form-label">Pilih Metode Pembayaran</label>
-                <select class="form-select" id="metodePembayaran" name="metodePembayaran" required>
-                    <option value="" disabled selected>Pilih salah satu</option>
-                    <option value="Transfer">Transfer Bank</option>
-                    <option value="E_Wallet">E-Wallet</option>
-                </select>
+        <!-- Header -->
+        <h2 class="text-center mb-4">Detail Pembayaran</h2>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <!-- Informasi Harga -->
+                <h5 class="card-title">Total Pembayaran</h5>
+                <p class="card-text">
+                    <strong>Harga:</strong> Rp<span th:text="${harga}"></span>
+                </p>
             </div>
-            
-            <div class="d-flex justify-content-between">
-                <button type="submit" name="action" value="cancel" class="btn btn-danger">Cancel</button>
-                <button type="submit" name="action" value="confirm" class="btn btn-success">Konfirmasi</button>
+        </div>
+        
+        <!-- Form Metode Pembayaran -->
+        <div class="card mt-4 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Pilih Metode Pembayaran</h5>
+                <form action="/proses-pembayaran" method="post">
+                    <input type="hidden" name="selectedKursiId" th:value="${selectedKursiId}" />
+                    <input type="hidden" id="shuttleId" name="shuttleId" th:value="${shuttleId}">
+                    <input type="hidden" id="penumpangId" name="penumpangId" th:value="${penumpangId}">
+                    
+                    <div class="mb-3">
+                        <label for="metodePembayaran" class="form-label">Metode Pembayaran</label>
+                        <select class="form-select" id="metodePembayaran" name="metodePembayaran" required>
+                            <option value="" disabled selected>Pilih salah satu</option>
+                            <option value="Transfer">Transfer Bank</option>
+                            <option value="E_Wallet">E-Wallet</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Tombol Aksi -->
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="submit" name="action" value="cancel" class="btn btn-danger">Batal</button>
+                        <button type="submit" name="action" value="confirm" class="btn btn-success">Konfirmasi</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </body>
 </html>
