@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>History Pembayaran</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Riwayat Pembayaran</h1>
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nama Penumpang</th>
+                    <th>Metode Pembayaran</th>
+                    <th>Status</th>
+                    <th>Tiket</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pembayaran : ${pembayaranList}">
+                    <td th:text="${pembayaran.id}"></td>
+                    <td th:text="${pembayaran.penumpang.nama}"></td>
+                    <td th:text="${pembayaran.metodePembayaran}"></td>
+                    <td th:text="${pembayaran.status}"></td>
+                    <td>
+                        <p th:if="${pembayaran.status.toString() == 'TERKONFIRMASI'}">
+                            <!-- Tombol untuk tiket -->
+                            <a th:href="@{'/show-tiket?pembayaranId=' + ${pembayaran.id}}" class="btn btn-success">Lihat Tiket</a>
+                        </p>
+                        <p th:if="${pembayaran.status.toString() == 'CANCEL'}">
+                            <!-- Status tidak tersedia -->
+                            <span class="btn btn-secondary disabled">Tidak Tersedia</span>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-primary">Kembali ke Beranda</a>
+    </div>
+</div>
+</body>
+</html>

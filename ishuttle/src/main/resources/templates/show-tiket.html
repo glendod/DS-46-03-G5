@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tiket Saya</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Detail Tiket</h1>
+    <div class="card mt-4">
+        <div class="card-body">
+            <p class="card-text"><strong>Nama Penumpang:</strong> <span th:text="${tiket.namaPenumpang}"></span></p>
+            <p class="card-text"><strong>Nomor Kursi:</strong> <span th:text="${tiket.nomorKursi}"></span></p>
+            <p class="card-text"><strong>Keberangkatan:</strong> <span th:text="${tiket.keberangkatan}"></span></p>
+            <p class="card-text"><strong>Tujuan:</strong> <span th:text="${tiket.tujuan}"></span></p>
+            <p class="card-text"><strong>Tanggal Keberangkatan:</strong> <span th:text="${tiket.tanggalKeberangkatan}"></span></p>
+            <p class="card-text"><strong>Jam Keberangkatan:</strong> <span th:text="${tiket.jamKeberangkatan}"></span></p>
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-primary">Kembali ke Beranda</a>
+    </div>
+</div>
+</body>
+</html>
