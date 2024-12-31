@@ -77,7 +77,7 @@ public class PembayaranController {
             // Simpan pembayaran
             pembayaranService.simpanPembayaran(pembayaran);
 
-            return "redirect:/";
+            return "redirect:/home";
         } else if ("confirm".equals(action)) {
             // Proses konfirmasi pembayaran
             Pembayaran pembayaran = new Pembayaran();
@@ -109,7 +109,7 @@ public class PembayaranController {
 
             return "redirect:/show-tiket?pembayaranId="+ pembayaran.getId();
         }
-        return "redirect:/";
+        return "redirect:/home";
     }
 
     
