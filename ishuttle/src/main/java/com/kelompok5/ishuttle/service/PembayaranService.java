@@ -2,6 +2,7 @@ package com.kelompok5.ishuttle.service;
 
 import com.kelompok5.ishuttle.model.Pembayaran;
 import com.kelompok5.ishuttle.model.StatusPembayaran;
+import com.kelompok5.ishuttle.model.User;
 import com.kelompok5.ishuttle.repository.PembayaranRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class PembayaranService {
         return pembayaranRepository.findById(id).orElse(null);
     }
 
-    public List<Pembayaran> ambilRiwayatPembayaran() {
-        return pembayaranRepository.findAll(); // Anda bisa menambahkan filter jika perlu
+    public List<Pembayaran> ambilRiwayatPembayaran(User user) {
+        return pembayaranRepository.findByUser(user);
     }
 }

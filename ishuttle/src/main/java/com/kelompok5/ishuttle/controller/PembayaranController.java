@@ -4,6 +4,9 @@ import com.kelompok5.ishuttle.model.*;
 import com.kelompok5.ishuttle.service.KursiService;
 import com.kelompok5.ishuttle.service.PembayaranService;
 import com.kelompok5.ishuttle.service.ShuttleService;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,20 +49,23 @@ public class PembayaranController {
                                    @RequestParam("selectedKursiId") Long selectedKursiId, 
                                    @RequestParam("shuttleId") Long shuttleId, 
                                    @RequestParam("penumpangId") Long penumpangId, 
-                                   Model model) {
+                                   Model model,
+                                   HttpSession session) {
 
         System.out.println(selectedKursiId);
         System.out.println(shuttleId);
         System.out.println(penumpangId);    
-         
+        User user = (User) session.getAttribute("user");
               
         if ("cancel".equals(action)) {
             // Jika pengguna membatalkan pembayaran
 
             Pembayaran pembayaran = new Pembayaran();
+
             pembayaran.setMetodePembayaran(MetodePembayaran.valueOf(metodePembayaran));
             pembayaran.setStatus(StatusPembayaran.CANCEL);
             pembayaran.setTanggalPembayaran(LocalDateTime.now());
+            pembayaran.setUser(user);
 
             // Set relasi objek
             Kursi kursi = new Kursi();
@@ -84,6 +90,7 @@ public class PembayaranController {
             pembayaran.setMetodePembayaran(MetodePembayaran.valueOf(metodePembayaran));
             pembayaran.setStatus(StatusPembayaran.TERKONFIRMASI);
             pembayaran.setTanggalPembayaran(LocalDateTime.now());
+            pembayaran.setUser(user);
 
             // Set relasi objek
             Kursi kursi = new Kursi();

@@ -35,6 +35,10 @@ public class Pembayaran {
     @Column(name = "tanggal_pembayaran", nullable = false)
     private LocalDateTime tanggalPembayaran = LocalDateTime.now();
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     
 }
 
