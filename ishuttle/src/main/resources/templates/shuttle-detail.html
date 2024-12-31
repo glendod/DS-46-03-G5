@@ -24,7 +24,11 @@
                     <td th:text="${shuttle.harga}"></td>
                     <td th:text="${shuttle.kursiTersisa}"></td>
                     <td>
-                        <a th:href="@{'/form-penumpang?shuttleId=' + ${shuttle.id}}" class="btn btn-primary">Pilih</a>
+                        <a th:if="${shuttle.kursiTersisa > 0}" 
+                           th:href="@{'/form-penumpang?shuttleId=' + ${shuttle.id}}" 
+                           class="btn btn-primary">Pilih</a>
+                        <button th:if="${shuttle.kursiTersisa == 0}" 
+                                class="btn btn-secondary" disabled>Kursi Penuh</button>
                     </td>
                 </tr>
             </tbody>
