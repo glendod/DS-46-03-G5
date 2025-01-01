@@ -4,17 +4,34 @@
     <title>Pilih Kursi</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
-        /* Layout utama: flexbox untuk denah dan keterangan */
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #004085; 
+        }
+
+        .navbar-brand {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-weight: bold;
+            color: #ffffff !important; 
+        }
+
+        .navbar-brand:hover {
+            color: #d1d1d1 !important; 
+        }
+
         .layout {
             display: flex;
             justify-content: center;
             gap: 40px;
         }
 
-        /* Denah Kursi */
         .kursi-container {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 2 kolom */
+            grid-template-columns: 1fr 1fr; 
             gap: 20px;
             justify-content: center;
         }
@@ -25,20 +42,20 @@
             justify-content: center;
             width: 60px;
             height: 60px;
-            border: 2px solid #ccc;
+            border: 2px solid #d1d1d1;
             border-radius: 5px;
             text-align: center;
             font-weight: bold;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        /* Supir di kanan */
         .kursi.supir {
             background-color: white;
             border-color: red;
             cursor: not-allowed;
-            grid-column: 2; /* Supir di kolom kanan */
-            grid-row: 1; /* Baris pertama */
+            grid-column: 2;
+            grid-row: 1;
         }
 
         .kursi.booked {
@@ -55,7 +72,10 @@
             color: white;
         }
 
-        /* Keterangan */
+        .kursi:hover {
+            background-color: #f0f0f0;
+        }
+
         .keterangan {
             display: flex;
             flex-direction: column;
@@ -92,30 +112,43 @@
         .kotak.selected {
             background-color: red;
         }
+
+        .btn-primary {
+            background-color: #004085;
+            border: none;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #002752; 
+        }
+
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/home">iShuttle</a>
+        </div>
+    </nav>
+
     <div class="container mt-5">
-        <h2 class="text-center mb-4">Pilih Kursi</h2>
+        <h2 class="text-center mb-4" style="color: #004085;">Pilih Kursi</h2>
         <div class="layout">
-            <!-- Denah Kursi -->
             <div class="kursi-container">
-                <!-- Supir -->
+
                 <div class="kursi supir">SUPIR</div>
 
-                <!-- Kursi -->
                 <div th:each="kursi : ${kursiList}" 
                      class="kursi"
                      th:classappend="${!kursi.ketersediaan ? 'booked' : 'available'}" 
                      th:text="${kursi.nomorKursi}" 
                      th:data-nomor="${kursi.nomorKursi}"
                      th:data-id="${kursi.id}"
-                     
                      th:attr="onclick=${kursi.ketersediaan ? 'selectKursi(' + kursi.nomorKursi + ', ' + kursi.id + ')' : ''}">
                 </div>
             </div>
 
-            <!-- Keterangan -->
             <div class="keterangan">
                 <div class="keterangan-item">
                     <div class="kotak booked"></div>
@@ -132,7 +165,6 @@
             </div>
         </div>
 
-        <!-- Tombol Lanjut -->
         <div class="mt-4 text-center">
             <form th:action="@{'/lanjut-pembayaran'}" method="post">
                 <input type="hidden" id="shuttleId" name="shuttleId" th:value="${shuttleId}">
@@ -149,19 +181,17 @@
         let selectedKursiId = null;
 
         function selectKursi(kursiNomor, kursiId) {
-        // Hapus highlight kursi sebelumnya
-        if (selectedKursiNomor) {
-            document.querySelector(`.kursi[data-nomor="${selectedKursiNomor}"]`).classList.remove('selected');
-        }
+            if (selectedKursiNomor) {
+                document.querySelector(`.kursi[data-nomor="${selectedKursiNomor}"]`).classList.remove('selected');
+            }
 
-        // Tandai kursi yang dipilih
-        selectedKursiNomor = kursiNomor;
-        selectedKursiId = kursiId;
+            selectedKursiNomor = kursiNomor;
+            selectedKursiId = kursiId;
 
-        document.getElementById('selectedKursiNomor').value = kursiNomor; // Nomor kursi
-        document.getElementById('selectedKursiId').value = kursiId;       // ID kursi
+            document.getElementById('selectedKursiNomor').value = kursiNomor;
+            document.getElementById('selectedKursiId').value = kursiId;
 
-        document.querySelector(`.kursi[data-nomor="${kursiNomor}"]`).classList.add('selected');
+            document.querySelector(`.kursi[data-nomor="${kursiNomor}"]`).classList.add('selected');
         }
     </script>
 </body>
