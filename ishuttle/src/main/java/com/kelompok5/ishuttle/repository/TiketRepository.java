@@ -5,6 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface TiketRepository extends JpaRepository<Tiket, Long> {
-    // Tiket findByPembayaranId(Long pembayaranId);
     Optional<Tiket> findByPembayaranId(Long pembayaranId);
 }

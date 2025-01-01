@@ -4,7 +4,6 @@ import com.kelompok5.ishuttle.model.Kursi;
 import com.kelompok5.ishuttle.repository.KursiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-// import com.kelompok5.ishuttle.repository.ShuttleRepository;
 import java.util.List;
 
 @Service
@@ -25,8 +24,6 @@ public class KursiService {
         return kursiRepository.save(kursi);
     }
 
-    // @Autowired
-    // private ShuttleRepository shuttleRepository;
 
     public List<Kursi> ambilKursiDariShuttle(Long shuttleId) {
         return kursiRepository.findByShuttleId(shuttleId);

@@ -1,7 +1,5 @@
 package com.kelompok5.ishuttle.model;
 
-// import java.util.List;
-
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,7 +17,5 @@ public class Penumpang {
 
     @Column(name = "nomor_hp", nullable = false)
     private String nomorHp;
-
-    // @OneToMany(mappedBy = "penumpang")
-    // private List<Pembayaran> pembayaranList;
+;
 }

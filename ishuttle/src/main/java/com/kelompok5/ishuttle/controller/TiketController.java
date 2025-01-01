@@ -16,12 +16,11 @@ public class TiketController {
 
     @GetMapping("/show-tiket")
     public String showTiket(@RequestParam("pembayaranId") Long pembayaranId, Model model) {
-        // Ambil tiket berdasarkan ID pembayaran
+
         Tiket tiket = tiketService.createTiketFromPembayaran(pembayaranId);
 
-        // Tambahkan tiket ke model
         model.addAttribute("tiket", tiket);
 
-        return "show-tiket"; // Halaman HTML
+        return "show-tiket";
     }
 }

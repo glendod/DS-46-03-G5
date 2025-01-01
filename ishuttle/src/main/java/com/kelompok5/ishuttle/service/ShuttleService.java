@@ -15,7 +15,6 @@ public class ShuttleService {
     private ShuttleRepository shuttleRepository;
 
     public List<Shuttle> cariShuttle(String keberangkatan, String tujuan, LocalDate tanggal) {
-        // LocalDate tanggalKeberangkatan = LocalDate.parse(tanggal); // Konversi String ke LocalDate
         return shuttleRepository.findByKeberangkatanAndTujuanAndTanggalKeberangkatan(keberangkatan, tujuan,tanggal);
     }
 
