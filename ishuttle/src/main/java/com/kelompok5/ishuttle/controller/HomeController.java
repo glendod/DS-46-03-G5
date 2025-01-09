@@ -9,6 +9,6 @@ public class HomeController {
     
     @GetMapping("/home")
     public String tampilkanHome(Model model) {
-        return "home"; // Menuju home.html
+        return "home";
     }
 }
